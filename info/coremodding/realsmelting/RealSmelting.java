@@ -5,17 +5,17 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 
 /**
- * @author James
- * The real smelting main mod class
+ * @author James The real smelting main mod class
  */
 @Mod(modid = "cm_RealSmelting", name = "Real Smelting", version = "UNSET")
 public class RealSmelting {
-	
+
 	/**
-	 * @param evt The event that triggered the method
+	 * @param evt
+	 *            The event that triggered the method
 	 */
 	@EventHandler
-	public void init(FMLInitializationEvent evt){
-		
+	public void init(FMLInitializationEvent evt) {
+
 	}
 }
