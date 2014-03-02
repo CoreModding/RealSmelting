@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 /**
  * @author James The furnace block
  */
-public class BlockFurnace extends BlockContainer {
+class BlockFurnace extends BlockContainer {
 
     protected BlockFurnace() {
         super(Material.rock);
