@@ -14,12 +14,12 @@ import java.io.ObjectOutputStream;
  */
 public class FurnaceEntity extends TileEntity {
 
-    ItemStack[] que;
-    ItemStack[] smelted;
-    ItemStack[] smelting;
+    private ItemStack[] que;
+    private ItemStack[] smelted;
+    private ItemStack[] smelting;
 
-    int[] smelt_progress;
-    int smelt_time;
+    private int[] smelt_progress;
+    private final int smelt_time;
 
     /**
      * The tertiary constructor
@@ -49,8 +49,8 @@ public class FurnaceEntity extends TileEntity {
     /**
      * The main constructor
      *
-     * @param slots  The slots amount for input and output
-     * @param ticks  The amount of ticks to cook something
+     * @param slots   The slots amount for input and output
+     * @param ticks   The amount of ticks to cook something
      * @param at_once How many things can be cooking at once
      */
     public FurnaceEntity(int slots, int ticks, int at_once) {
