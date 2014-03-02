@@ -12,26 +12,26 @@ import net.minecraft.world.World;
  */
 public class BlockFurnace extends BlockContainer {
 
-	protected BlockFurnace() {
-		super(Material.rock);
-		// this.set
-	}
+    protected BlockFurnace() {
+        super(Material.rock);
+        // this.set
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
-		// return new FurnaceEntity();
-		return null;
-	}
+    @Override
+    public TileEntity createNewTileEntity(World var1, int var2) {
+        // return new FurnaceEntity();
+        return null;
+    }
 
-	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k,
-			Block block) {
-		FurnaceEntity tileEntity = (FurnaceEntity) world.getTileEntity(i, j, k);
-		if (tileEntity != null) {
-			if (world.getBlock(tileEntity.xCoord, tileEntity.yCoord,
-					tileEntity.zCoord) instanceof BlockFurnace) {
-				world.removeTileEntity(i, j, k);
-			}
-		}
-	}
+    @Override
+    public void onNeighborBlockChange(World world, int i, int j, int k,
+                                      Block block) {
+        FurnaceEntity tileEntity = (FurnaceEntity) world.getTileEntity(i, j, k);
+        if (tileEntity != null) {
+            if (world.getBlock(tileEntity.xCoord, tileEntity.yCoord,
+                    tileEntity.zCoord) instanceof BlockFurnace) {
+                world.removeTileEntity(i, j, k);
+            }
+        }
+    }
 }
