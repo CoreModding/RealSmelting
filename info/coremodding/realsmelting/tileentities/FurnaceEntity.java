@@ -18,11 +18,11 @@ public class FurnaceEntity extends TileEntity {
     ItemStack[] smelted;
     ItemStack[] smelting;
 
-    int[] smeltprogress;
-    int smelttime;
+    int[] smelt_progress;
+    int smelt_time;
 
     /**
-     * The teritary constructor
+     * The tertiary constructor
      *
      * @param ticks The ticks it takes to cook something
      */
@@ -30,7 +30,7 @@ public class FurnaceEntity extends TileEntity {
         this.que = new ItemStack[1];
         this.smelted = new ItemStack[1];
         this.smelting = new ItemStack[1];
-        this.smelttime = ticks;
+        this.smelt_time = ticks;
     }
 
     /**
@@ -43,7 +43,7 @@ public class FurnaceEntity extends TileEntity {
         this.que = new ItemStack[slots];
         this.smelted = new ItemStack[slots];
         this.smelting = new ItemStack[1];
-        this.smelttime = ticks;
+        this.smelt_time = ticks;
     }
 
     /**
@@ -51,14 +51,14 @@ public class FurnaceEntity extends TileEntity {
      *
      * @param slots  The slots amount for input and output
      * @param ticks  The amount of ticks to cook something
-     * @param atonce How many things can be cooking at once
+     * @param at_once How many things can be cooking at once
      */
-    public FurnaceEntity(int slots, int ticks, int atonce) {
+    public FurnaceEntity(int slots, int ticks, int at_once) {
         this.que = new ItemStack[slots];
         this.smelted = new ItemStack[slots];
-        this.smelting = new ItemStack[atonce];
-        this.smeltprogress = new int[atonce];
-        this.smelttime = ticks;
+        this.smelting = new ItemStack[at_once];
+        this.smelt_progress = new int[at_once];
+        this.smelt_time = ticks;
     }
 
     @Override
@@ -102,8 +102,8 @@ public class FurnaceEntity extends TileEntity {
         for (ItemStack item : this.smelting) {
             if (item != null && emptyend > 0) {
                 emptyend++;
-                this.smeltprogress[i]++;
-                if (this.smeltprogress[i] > this.smelttime) {
+                this.smelt_progress[i]++;
+                if (this.smelt_progress[i] > this.smelt_time) {
                     this.smelting[i] = null;
                     int i2 = 0;
                     for (ItemStack item2 : this.smelted) {
@@ -112,7 +112,7 @@ public class FurnaceEntity extends TileEntity {
                         }
                         i2++;
                     }
-                    this.smeltprogress[i] = 0;
+                    this.smelt_progress[i] = 0;
                 }
             }
             if (item == null) {
