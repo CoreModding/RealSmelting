@@ -3,6 +3,6 @@
  */
 /**
  * @author James
- * The real smelting main package
+ *         The real smelting main package
  */
 package info.coremodding.realsmelting;

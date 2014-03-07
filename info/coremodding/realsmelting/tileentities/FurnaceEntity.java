@@ -12,59 +12,71 @@ import java.io.ObjectOutputStream;
 /**
  * @author James The furnace tile entity
  */
-public class FurnaceEntity extends TileEntity {
-
+public class FurnaceEntity extends TileEntity
+{
+    
     private ItemStack[] que;
     private ItemStack[] smelted;
     private ItemStack[] smelting;
-
-    private int[] smelt_progress;
-    private final int smelt_time;
-
+    
+    private int[]       smelt_progress;
+    private final int   smelt_time;
+    
     /**
      * The tertiary constructor
-     *
-     * @param ticks The ticks it takes to cook something
+     * 
+     * @param ticks
+     *            The ticks it takes to cook something
      */
-    public FurnaceEntity(int ticks) {
+    public FurnaceEntity(int ticks)
+    {
         this.que = new ItemStack[1];
         this.smelted = new ItemStack[1];
         this.smelting = new ItemStack[1];
         this.smelt_time = ticks;
     }
-
+    
     /**
      * The secondary constructor
-     *
-     * @param slots The amount of slots of input
-     * @param ticks The ticks it takes to cook something
+     * 
+     * @param slots
+     *            The amount of slots of input
+     * @param ticks
+     *            The ticks it takes to cook something
      */
-    public FurnaceEntity(int slots, int ticks) {
+    public FurnaceEntity(int slots, int ticks)
+    {
         this.que = new ItemStack[slots];
         this.smelted = new ItemStack[slots];
         this.smelting = new ItemStack[1];
         this.smelt_time = ticks;
     }
-
+    
     /**
      * The main constructor
-     *
-     * @param slots   The slots amount for input and output
-     * @param ticks   The amount of ticks to cook something
-     * @param at_once How many things can be cooking at once
+     * 
+     * @param slots
+     *            The slots amount for input and output
+     * @param ticks
+     *            The amount of ticks to cook something
+     * @param at_once
+     *            How many things can be cooking at once
      */
-    public FurnaceEntity(int slots, int ticks, int at_once) {
+    public FurnaceEntity(int slots, int ticks, int at_once)
+    {
         this.que = new ItemStack[slots];
         this.smelted = new ItemStack[slots];
         this.smelting = new ItemStack[at_once];
         this.smelt_progress = new int[at_once];
         this.smelt_time = ticks;
     }
-
+    
     @Override
-    public void readFromNBT(NBTTagCompound nbt) {
+    public void readFromNBT(NBTTagCompound nbt)
+    {
         super.readFromNBT(nbt);
-        try {
+        try
+        {
             {
                 byte[] data;
                 data = nbt.getByteArray("que");
@@ -86,28 +98,35 @@ public class FurnaceEntity extends TileEntity {
                 ObjectInputStream oin = new ObjectInputStream(in);
                 this.smelted = (ItemStack[]) oin.readObject();
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
-
+    
     @Override
-    public void updateEntity() {
+    public void updateEntity()
+    {
         int i = 0;
         int emptyend = 0;
-        for (ItemStack item : this.smelted) {
-            if (item == null)
-                emptyend++;
+        for (ItemStack item : this.smelted)
+        {
+            if (item == null) emptyend++;
         }
-        for (ItemStack item : this.smelting) {
-            if (item != null && emptyend > 0) {
+        for (ItemStack item : this.smelting)
+        {
+            if (item != null && emptyend > 0)
+            {
                 emptyend++;
                 this.smelt_progress[i]++;
-                if (this.smelt_progress[i] > this.smelt_time) {
+                if (this.smelt_progress[i] > this.smelt_time)
+                {
                     this.smelting[i] = null;
                     int i2 = 0;
-                    for (ItemStack item2 : this.smelted) {
-                        if (item2 == null) {
+                    for (ItemStack item2 : this.smelted)
+                    {
+                        if (item2 == null)
+                        {
                             this.smelted[i2] = item;
                         }
                         i2++;
@@ -115,12 +134,16 @@ public class FurnaceEntity extends TileEntity {
                     this.smelt_progress[i] = 0;
                 }
             }
-            if (item == null) {
+            if (item == null)
+            {
                 int i2 = 0;
-                for (ItemStack item2 : this.que) {
-                    if (item2 != null) {
+                for (ItemStack item2 : this.que)
+                {
+                    if (item2 != null)
+                    {
                         item2.stackSize--;
-                        if (item2.stackSize == 0) {
+                        if (item2.stackSize == 0)
+                        {
                             this.que[i2] = null;
                         }
                         this.smelting[i] = new ItemStack(item2.getItem(), 1);
@@ -132,11 +155,13 @@ public class FurnaceEntity extends TileEntity {
             i++;
         }
     }
-
+    
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
+    public void writeToNBT(NBTTagCompound nbt)
+    {
         super.writeToNBT(nbt);
-        try {
+        try
+        {
             {
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 ObjectOutputStream obj;
@@ -158,7 +183,8 @@ public class FurnaceEntity extends TileEntity {
                 obj.writeObject(this.smelted);
                 nbt.setByteArray("smelted", out.toByteArray());
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
     }

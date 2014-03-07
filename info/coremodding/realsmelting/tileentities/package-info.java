@@ -3,6 +3,6 @@
  */
 /**
  * @author James
- * Mod tile entities
+ *         Mod tile entities
  */
 package info.coremodding.realsmelting.tileentities;

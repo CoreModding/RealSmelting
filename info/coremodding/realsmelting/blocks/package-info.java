@@ -3,6 +3,6 @@
  */
 /**
  * @author James
- * Mod blocks
+ *         Mod blocks
  */
 package info.coremodding.realsmelting.blocks;
