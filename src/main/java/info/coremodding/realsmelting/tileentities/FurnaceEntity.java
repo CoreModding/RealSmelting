@@ -98,7 +98,8 @@ public class FurnaceEntity extends TileEntity
                 ObjectInputStream oin = new ObjectInputStream(in);
                 this.smelted = (ItemStack[]) oin.readObject();
             }
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }
@@ -183,7 +184,8 @@ public class FurnaceEntity extends TileEntity
                 obj.writeObject(this.smelted);
                 nbt.setByteArray("smelted", out.toByteArray());
             }
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }

@@ -27,14 +27,12 @@ class BlockFurnace extends BlockContainer
     }
     
     @Override
-    public void onNeighborBlockChange(World world, int i, int j, int k,
-            Block block)
+    public void onNeighborBlockChange(World world, int i, int j, int k, Block block)
     {
         FurnaceEntity tileEntity = (FurnaceEntity) world.getTileEntity(i, j, k);
         if (tileEntity != null)
         {
-            if (world.getBlock(tileEntity.xCoord, tileEntity.yCoord,
-                    tileEntity.zCoord) instanceof BlockFurnace)
+            if (world.getBlock(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord) instanceof BlockFurnace)
             {
                 world.removeTileEntity(i, j, k);
             }
