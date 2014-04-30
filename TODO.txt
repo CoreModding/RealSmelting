@@ -1,0 +1,14 @@
+Original mod request:
+Name: Magma furnace
+
+Basic description: Multiblock furnace that uses only lava as fuel and has larger number of input and output slots.
+
+Extreme detail: For interface, magma furnace have have 3*3 input inventory and output inventory of same size. Smelting operation is faster than in vanilla furnace; one operation takes 6 seconds. To balance increased speed fuel consuption is increased. While in vanilla furnace one bucket of lava is enough to operate 100 items, magma furnace can operate only 85 items. Fuel will be consumed only when there is something to operate on.
+Magma furnace can store 16 buckets worth of lava. Fuel can be stored throught interface, by right clicking lava bucket at furnace and by Buildcraft pipes.
+Multiblock structure is is size of 2*2*2. The building block for magma furnace consists of following materials: Obsidian (O), Furnace (F), Buildcraft tank (if installed) or Glass block (G) and Nether Brick (N). The actual recipe is like this:
+NNN
+GFG
+OOO
+Not sure if it's given, but this should be be Forge mod.
+
+Summary: Not sure what to write here. A Forge mod to create Magma Furnace, next tier of furnace with more efficient fuel usage.
