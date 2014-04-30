@@ -1,5 +1,6 @@
 package info.coremodding.realsmelting.blocks;
 
+import info.coremodding.realsmelting.helpers.MultiBlockHelper;
 import info.coremodding.realsmelting.tileentities.FurnaceEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -29,13 +30,10 @@ class BlockFurnace extends BlockContainer
     @Override
     public void onNeighborBlockChange(World world, int i, int j, int k, Block block)
     {
-        FurnaceEntity tileEntity = (FurnaceEntity) world.getTileEntity(i, j, k);
-        if (tileEntity != null)
-        {
-            if (world.getBlock(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord) instanceof BlockFurnace)
-            {
-                world.removeTileEntity(i, j, k);
-            }
+        if(MultiBlockHelper.isMultiBlockStructure(world, i, j, k) && !MultiBlockHelper.doesHaveTileEntity(world, i, j, k)){
+            world.setTileEntity(i, j, k, new FurnaceEntity(9, 100));
+        } else if(!MultiBlockHelper.isMultiBlockStructure(world, i, j, k)) {
+            world.removeTileEntity(i, j, k);
         }
     }
 }
