@@ -5,6 +5,7 @@ import info.coremodding.realsmelting.tileentities.FurnaceEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -18,13 +19,14 @@ class BlockFurnace extends BlockContainer
     {
         super(Material.rock);
         // this.set
+        this.setCreativeTab(CreativeTabs.tabBlock);
     }
     
     @Override
     public TileEntity createNewTileEntity(World var1, int var2)
     {
         // return new FurnaceEntity();
-        return null;
+        return new FurnaceEntity(20);
     }
     
     @Override
