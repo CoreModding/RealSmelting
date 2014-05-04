@@ -1,5 +1,6 @@
 package info.coremodding.realsmelting.blocks;
 
+import info.coremodding.realsmelting.RealSmelting;
 import info.coremodding.realsmelting.helpers.MultiBlockHelper;
 import info.coremodding.realsmelting.tileentities.FurnaceEntity;
 import net.minecraft.block.Block;
@@ -19,7 +20,7 @@ class BlockFurnace extends BlockContainer
     {
         super(Material.rock);
         // this.set
-        this.setCreativeTab(CreativeTabs.tabBlock);
+        this.setCreativeTab(RealSmelting.tabRealSmelting);
     }
     
     @Override

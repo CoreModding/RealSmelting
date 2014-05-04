@@ -1,38 +1,50 @@
 package info.coremodding.realsmelting;
 
+import net.minecraft.creativetab.CreativeTabs;
 import info.coremodding.realsmelting.blocks.RSBlocks;
+import info.coremodding.realsmelting.gui.GuiHandler;
+import info.coremodding.realsmelting.items.RSItems;
+import info.coremodding.realsmelting.lib.Strings;
+import info.coremodding.realsmelting.tileentities.FurnaceEntity;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * @author James The real smelting main mod class
  */
-@Mod(modid = "cm_RealSmelting", name = "Real Smelting", version = "UNSET")
+
+@Mod(modid = Strings.MODID, name = Strings.name , version = Strings.version)
+
 public class RealSmelting
 {
+	
+	public static CreativeTabs tabRealSmelting = new CreaticeTabRealSmelting("RealSmelting");
+	@SidedProxy(clientSide = "info.coremodding.realsmelting.ClientProxey", serverSide = "info.coremodding.realsmelting.ServerProxey")
+	public static ServerProxey proxey;
 	
 	@EventHandler
 	public static void PreLoad(FMLPreInitializationEvent PreEvent){
 		RSBlocks.mainRegistry();
+		RSItems.mainRegistry();
 	}
 	
 	@EventHandler
 	public static void load(FMLInitializationEvent event){
-		
+		NetworkRegistry.INSTANCE.registerGuiHandler(Strings.MODID, new GuiHandler());
 	}
 	
 	@EventHandler
 	public static void PostLoad(FMLPostInitializationEvent PostEvent){
-	
+		GameRegistry.registerTileEntity(FurnaceEntity.class,  "RS_Furnace");
 	}
     
-    /**
-     * @param evt
-     *            The event that triggered the method
-     */
     @EventHandler
     public void init(FMLInitializationEvent e)
     {

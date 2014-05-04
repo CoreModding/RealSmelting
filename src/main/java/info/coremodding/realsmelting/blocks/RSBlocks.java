@@ -12,8 +12,6 @@ public class RSBlocks {
 	
 	public static Block BlockFrunace;
 
-	
-
 	public static void InitialiseBlock() {
 		BlockFrunace = new BlockFurnace().setBlockName("BlockFurnace");
 	}
