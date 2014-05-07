@@ -6,6 +6,7 @@ import info.coremodding.realsmelting.gui.GuiHandler;
 import info.coremodding.realsmelting.items.RSItems;
 import info.coremodding.realsmelting.lib.Strings;
 import info.coremodding.realsmelting.tileentities.FurnaceEntity;
+import info.coremodding.realsmelting.tileentities.TileEntityLavaFurnace;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -25,6 +26,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class RealSmelting
 {
 	
+	@Instance(Strings.MODID)
+	public static RealSmelting instance;
+	
+	public static final int FurnaceGUIid = 1;
+	public static final int LavaFurnaceGUI = 2;
+	
 	public static CreativeTabs tabRealSmelting = new CreaticeTabRealSmelting("RealSmelting");
 	@SidedProxy(clientSide = "info.coremodding.realsmelting.ClientProxey", serverSide = "info.coremodding.realsmelting.ServerProxey")
 	public static ServerProxey proxey;
@@ -43,6 +50,7 @@ public class RealSmelting
 	@EventHandler
 	public static void PostLoad(FMLPostInitializationEvent PostEvent){
 		GameRegistry.registerTileEntity(FurnaceEntity.class,  "RS_Furnace");
+		GameRegistry.registerTileEntity(TileEntityLavaFurnace.class,  "RS_Lava_Furnace");
 	}
     
     @EventHandler

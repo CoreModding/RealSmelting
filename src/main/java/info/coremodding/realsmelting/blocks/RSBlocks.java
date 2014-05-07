@@ -11,13 +11,19 @@ public class RSBlocks {
 	}
 	
 	public static Block BlockFrunace;
+	public static Block LavaFurnaceIdle;
+	public static Block LavaFurnaceActive;
 
 	public static void InitialiseBlock() {
 		BlockFrunace = new BlockFurnace().setBlockName("BlockFurnace");
+		LavaFurnaceIdle = new LavaFurnace(false);
+		LavaFurnaceActive = new LavaFurnace(true);
 	}
 	
-	public static void registerBlock() {	
+	public static void registerBlock() {
 		GameRegistry.registerBlock(BlockFrunace, BlockFrunace.getUnlocalizedName());
+		GameRegistry.registerBlock(LavaFurnaceIdle, LavaFurnaceIdle.getUnlocalizedName());
+		GameRegistry.registerBlock(LavaFurnaceActive, LavaFurnaceActive.getUnlocalizedName());
 	}
 	
 	
