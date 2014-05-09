@@ -21,7 +21,7 @@ class MagmaFrunace extends BlockContainer
     protected MagmaFrunace()
     {
         super(Material.rock);
-        // this.set
+        this.setBlockName("MagmaFrunace");
         this.setCreativeTab(RealSmelting.tabRealSmelting);
     }
     

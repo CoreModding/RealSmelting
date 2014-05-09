@@ -15,7 +15,7 @@ public class RSBlocks {
 	public static Block LavaFurnaceActive;
 
 	public static void InitialiseBlock() {
-		MagmaFrunace = new MagmaFrunace().setBlockName("BlockFurnace");
+		MagmaFrunace = new MagmaFrunace();
 		LavaFurnaceIdle = new LavaFurnace(false);
 		LavaFurnaceActive = new LavaFurnace(true);
 	}

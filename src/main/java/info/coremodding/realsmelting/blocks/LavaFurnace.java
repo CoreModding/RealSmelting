@@ -1,10 +1,13 @@
 package info.coremodding.realsmelting.blocks;
 
+import java.util.List;
+
 import info.coremodding.realsmelting.RealSmelting;
 import info.coremodding.realsmelting.tileentities.TileEntityLavaFurnace;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -30,9 +33,15 @@ public class LavaFurnace extends BlockContainer {
 			this.setLightLevel(0.9F);
 		}
 		if(!isActive){
-			this.setBlockName("LavaFurnaceIDle");
+			this.setBlockName("LavaFurnaceIdle");
 			this.setCreativeTab(RealSmelting.tabRealSmelting);
 		}
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List info, boolean par4){
+		 info.add("Strounger then gold");
+		 info.add("but still enchatable");
 	}
 
 	@Override
