@@ -26,7 +26,7 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
 	public int furnaceSpeed;
 	
 	public float Temp;
-	public final float MaxTemp = 300;
+	public static float MaxTemp;
 	public static float TempRate = 0.01F;
 	public static int SpeedRate = 12;
 	
@@ -42,7 +42,8 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
 	
 	public TileEntityLavaFurnace(){
 		this.Temp = 0;
-		this.furnaceSpeed = 0;
+		this.furnaceSpeed = 2;
+		this.MaxTemp = 300;
 		this.slots = new ItemStack[2];
 	}
 

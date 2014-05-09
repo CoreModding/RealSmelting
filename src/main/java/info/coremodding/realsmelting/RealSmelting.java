@@ -5,7 +5,7 @@ import info.coremodding.realsmelting.blocks.RSBlocks;
 import info.coremodding.realsmelting.gui.GuiHandler;
 import info.coremodding.realsmelting.items.RSItems;
 import info.coremodding.realsmelting.lib.Strings;
-import info.coremodding.realsmelting.tileentities.FurnaceEntity;
+import info.coremodding.realsmelting.tileentities.TileEntityMagmaFrunace;
 import info.coremodding.realsmelting.tileentities.TileEntityLavaFurnace;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -49,7 +49,7 @@ public class RealSmelting
 	
 	@EventHandler
 	public static void PostLoad(FMLPostInitializationEvent PostEvent){
-		GameRegistry.registerTileEntity(FurnaceEntity.class,  "RS_Furnace");
+		GameRegistry.registerTileEntity(TileEntityMagmaFrunace.class,  "RS_Furnace");
 		GameRegistry.registerTileEntity(TileEntityLavaFurnace.class,  "RS_Lava_Furnace");
 	}
     
