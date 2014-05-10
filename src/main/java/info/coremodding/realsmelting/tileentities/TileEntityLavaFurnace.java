@@ -12,6 +12,11 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 
+/**
+ * 
+ * @author ProffessorVennie
+ *
+ */
 public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory{
 	
 
@@ -22,15 +27,11 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
 	private static final int[] slots_sides = new int[]{1};
 	
 	private ItemStack[] slots;
-	
 	public int furnaceSpeed;
-	
 	public float Temp;
 	public static float MaxTemp;
 	public static float TempRate;
 	public static int SpeedRate;
-	
-	public int currentItemBurnTime;
 	
 	public int cookTime;
 
@@ -107,6 +108,8 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
 			var2.stackSize = this.getInventoryStackLimit();
 		}
 	}
+	
+	
 
 	@Override
 	public String getInventoryName() {
@@ -140,9 +143,9 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
 				
 			}
 		}
-		this.Temp = (int)nbt.getShort("burntime");
-		this.cookTime = (int)nbt.getShort("cooktime");
-		this.currentItemBurnTime = (int)nbt.getShort("currentItemBurnTime");
+		this.Temp = (int)nbt.getFloat("temp");
+		this.cookTime = (int)nbt.getFloat("cooktime");
+		this.furnaceSpeed = (int)nbt.getInteger("furnaceSpeed");
 		
 		if(nbt.hasKey("customname")){
 			this.localizedName = nbt.getString("customname");
@@ -153,9 +156,9 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
 	public void writeToNBT(NBTTagCompound nbt){
 		super.writeToNBT(nbt);
 		
-		nbt.setShort("burntime", (short) this.Temp);
-		nbt.setShort("cooktime", (short) this.cookTime);
-		nbt.setShort("currentItemBurnTime", (short) this.currentItemBurnTime);
+		nbt.setFloat("temp", this.Temp);
+		nbt.setFloat("cooktime", this.cookTime);
+		nbt.setInteger("furnaceSpeed", this.furnaceSpeed);
 		
 		NBTTagList list = new NBTTagList();
 		
@@ -210,7 +213,7 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
 				}
 			}
 		}
-		System.out.println(this.Temp);
+		System.out.println(this.furnaceSpeed);
 		boolean flag = this.Temp > 0;
     	boolean flag1 = false;
 	
@@ -218,29 +221,30 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
     	if(this.Temp > this.MaxTemp){
     		this.Temp = this.MaxTemp;
     	}
-    	if(this.Temp > 0 && this.Temp <= 50){
-    		if(this.furnaceSpeed>15)
-    			this.furnaceSpeed += TempRate;
+    	if(this.Temp > 30 && this.Temp <= 50){
+    		if(this.furnaceSpeed > 78){
+    			this.furnaceSpeed = 90;
+    		}
     	}	
     	if(this.Temp > 50 && this.Temp <= 100){
-    		if(this.furnaceSpeed > 15)
-    			this.furnaceSpeed += TempRate;
+    		if(this.furnaceSpeed > 64)
+    			this.furnaceSpeed -= SpeedRate;
     	}
     	if(this.Temp > 100 && this.Temp <= 150){
-    		if(this.furnaceSpeed > 25)
-    			this.furnaceSpeed += TempRate;
+    		if(this.furnaceSpeed > 52)
+    			this.furnaceSpeed -= SpeedRate;
     	}
     	if(this.Temp > 150 && this.Temp <= 200){
-    		if(this.furnaceSpeed > 35)
-    			this.furnaceSpeed += TempRate;
+    		if(this.furnaceSpeed > 40)
+    			this.furnaceSpeed -= SpeedRate;
     	}
     	if(this.Temp > 200 && this.Temp <= 250){
-    		if(this.furnaceSpeed > 45)
-    			this.furnaceSpeed += TempRate;
+    		if(this.furnaceSpeed > 28)
+    			this.furnaceSpeed -= SpeedRate;
     	}
     	if(this.Temp > 250 && this.Temp <= 300){
-    		if(this.furnaceSpeed > 55)
-    			this.furnaceSpeed += TempRate;
+    		if(this.furnaceSpeed > 16)
+    			this.furnaceSpeed -= SpeedRate;
     	}
 
     	if (!this.worldObj.isRemote){

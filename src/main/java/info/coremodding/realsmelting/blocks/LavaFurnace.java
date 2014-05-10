@@ -15,6 +15,11 @@ import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * 
+ * @author ProffessorVennie
+ *
+ */
 public class LavaFurnace extends BlockContainer {
 	
 	@SideOnly(Side.CLIENT)
@@ -40,7 +45,7 @@ public class LavaFurnace extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new TileEntityLavaFurnace(2, 0, 300, 2, 0.01F, 12);
+		return new TileEntityLavaFurnace(2, 0, 300, 250, 0.01F, 12);
 	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitx, float hity, float hitz) {
