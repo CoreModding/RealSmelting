@@ -37,16 +37,10 @@ public class LavaFurnace extends BlockContainer {
 			this.setCreativeTab(RealSmelting.tabRealSmelting);
 		}
 	}
-	
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List info, boolean par4){
-		 info.add("Strounger then gold");
-		 info.add("but still enchatable");
-	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new TileEntityLavaFurnace();
+		return new TileEntityLavaFurnace(2, 0, 300, 2, 0.01F, 12);
 	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitx, float hity, float hitz) {

@@ -30,7 +30,6 @@ class MagmaFrunace extends BlockContainer
     		if(!player.isSneaking()){
     			if(MultiBlockHelper.isMultiBlockStructure(world, x, y, z)){
     				FMLNetworkHandler.openGui(player, RealSmelting.instance, RealSmelting.FurnaceGUIid, world, x, y, z);
-    				System.out.println("hi");
     			}
     		}
     	}

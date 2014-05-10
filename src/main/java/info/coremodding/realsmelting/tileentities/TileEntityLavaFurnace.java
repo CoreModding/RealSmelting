@@ -27,29 +27,46 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
 	
 	public float Temp;
 	public static float MaxTemp;
-	public static float TempRate = 0.01F;
-	public static int SpeedRate = 12;
+	public static float TempRate;
+	public static int SpeedRate;
 	
 	public int currentItemBurnTime;
 	
 	public int cookTime;
 
 	private int smeltItem;
-
-	public int getsizeInventory(){
-		return this.slots.length;
-	}
 	
-	public TileEntityLavaFurnace(){
-		this.Temp = 0;
-		this.furnaceSpeed = 2;
-		this.MaxTemp = 300;
-		this.slots = new ItemStack[2];
+	/**
+	 * 
+	 * @param slots 
+	 * 				The number of slots
+	 * @param Temp 
+	 * 				The starting temperature of the furnace
+	 * @param MaxTemp 
+	 * 				The max temperature of the furnace
+	 * @param furnaceSpeeed 
+	 * 				The starting speed of the furnace
+	 * @param TempRate
+	 * 				The amount the temperature increase or decreases
+	 * @param SpeedRate
+	 * 				The amount the furnace speed increase or decreases
+	 */
+	public TileEntityLavaFurnace(int slots, float Temp, float MaxTemp, int furnaceSpeeed, float TempRate, int SpeedRate){
+		this.Temp = Temp;
+		this.furnaceSpeed = furnaceSpeeed;
+		this.MaxTemp = MaxTemp;
+		this.slots = new ItemStack[slots];
+		this.TempRate = TempRate;
+		this.SpeedRate = SpeedRate;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int var1) {
 		return this.slots[var1];
+	}
+	
+	public int getsizeInventory(){
+		return this.slots.length;
 	}
 
 	@Override
