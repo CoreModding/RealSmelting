@@ -247,35 +247,25 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
     			this.furnaceSpeed -= SpeedRate;
     	}
 
-    	if (!this.worldObj.isRemote){
+    	if (!this.worldObj.isRemote)
+        		flag1 = true;		                
         	
+        	if (this.hasPower() && this.canSmelt()){
+            		this.cookTime++;
 
-        		flag1 = true;
-        	
-        		
-
-                		
-            	}                
-        	
-        	if (this.hasPower() && this.canSmelt())
-        	{
-            	this.cookTime++;
-
-            	if (this.cookTime == this.furnaceSpeed)
-            	{
-                	this.cookTime = 0;
-                	this.smeltItem();
-                	flag1 = true;
+            	if (this.cookTime == this.furnaceSpeed){
+                		this.cookTime = 0;
+                		this.smeltItem();
+                		flag1 = true;
             	}
         	}
-        	else
-        	{
+        	else{
             	this.cookTime = 0;
         	}
 			
 			if(flag != this.hasPower()){
 				flag1 = true;
-				LavaFurnace.updateSaltFurnaceBlockState(this.Temp > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+				LavaFurnace.updateLavaFurnaceState(this.Temp > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
 			}
 			
 	
@@ -304,19 +294,19 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
 	}
 	
 	public void smeltItem(){
-		if(this.canSmelt()){
-			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.slots[0]);
+			if(this.canSmelt()){
+				ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.slots[0]);
 			
-			if(this.slots[1] == null){
-				this.slots[1] = itemstack.copy();
-			}else if(this.slots[1].isItemEqual(itemstack)){
-				this.slots[1].stackSize += itemstack.stackSize;
-			}
+				if(this.slots[1] == null){
+					this.slots[1] = itemstack.copy();
+				}else if(this.slots[1].isItemEqual(itemstack)){
+					this.slots[1].stackSize += itemstack.stackSize;
+				}
 			
-			this.slots[0].stackSize--;
+				this.slots[0].stackSize--;
 			
-			if(this.slots[0].stackSize <= 0){
-				this.slots[0] = null;
+				if(this.slots[0].stackSize <= 0){
+					this.slots[0] = null;
 		}
 	}
 }

@@ -45,7 +45,7 @@ public class LavaFurnace extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new TileEntityLavaFurnace(2, 0, 300, 250, 0.01F, 12);
+		return new TileEntityLavaFurnace(2, 0, 1000, 250, 0.01F, 12);
 	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitx, float hity, float hitz) {
@@ -55,8 +55,7 @@ public class LavaFurnace extends BlockContainer {
 		return true;
 	}
 	
-	public static void updateSaltFurnaceBlockState(boolean active,
-			World worldObj, int xCoord, int yCoord, int zCoord) {
+	public static void updateLavaFurnaceState(boolean active, World worldObj, int xCoord, int yCoord, int zCoord) {
 		int i = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 		TileEntity tileentity = worldObj.getTileEntity(xCoord, yCoord, zCoord);
 		keepInventory = true;

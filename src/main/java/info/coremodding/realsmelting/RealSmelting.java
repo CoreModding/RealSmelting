@@ -1,7 +1,11 @@
 package info.coremodding.realsmelting;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import info.coremodding.realsmelting.achievements.RSAchievements;
 import info.coremodding.realsmelting.blocks.RSBlocks;
+import info.coremodding.realsmelting.events.RSEvents;
 import info.coremodding.realsmelting.gui.GuiHandler;
 import info.coremodding.realsmelting.items.RSItems;
 import info.coremodding.realsmelting.lib.Strings;
@@ -42,20 +46,25 @@ public class RealSmelting
 		RSItems.mainRegistry();
 	}
 	
+	
+	
 	@EventHandler
 	public static void load(FMLInitializationEvent event){
 		NetworkRegistry.INSTANCE.registerGuiHandler(Strings.MODID, new GuiHandler());
+		RSAchievements.registerAchievements();
+		RSEvents.registerEvents();
+		
+		GameRegistry.addRecipe(new ItemStack(RSBlocks.LavaFurnaceIdle), "   ", " x ", "   ", 'x', new ItemStack(Items.stick));
 	}
 	
 	@EventHandler
 	public static void PostLoad(FMLPostInitializationEvent PostEvent){
-		GameRegistry.registerTileEntity(TileEntityMagmaFrunace.class,  "RS_Furnace");
-		GameRegistry.registerTileEntity(TileEntityLavaFurnace.class,  "RS_Lava_Furnace");
+		GameRegistry.registerTileEntity(TileEntityMagmaFrunace.class, "RS_Furnace");
+		GameRegistry.registerTileEntity(TileEntityLavaFurnace.class, "RS_Lava_Furnace");
 	}
     
     @EventHandler
-    public void init(FMLInitializationEvent e)
-    {
+    public void init(FMLInitializationEvent e){
         
     }
 }

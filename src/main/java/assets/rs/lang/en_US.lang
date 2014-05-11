@@ -1,2 +1,6 @@
 tile.MagmaFrunace.name=Magma Furnace
 tile.LavaFurnaceIdle.name=Lava Furnace
+achievement.lavaFurnace=Lava Power
+achievement.lavaFurnace.desc=Craft a lava furnace
+achievement.magmaFurnace=Time for a upgrade
+achievement.magmaFurnace.desc=Craft a magma furnace
