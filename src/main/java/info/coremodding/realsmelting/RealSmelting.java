@@ -3,11 +3,13 @@ package info.coremodding.realsmelting;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.config.Configuration;
 import info.coremodding.realsmelting.achievements.RSAchievements;
 import info.coremodding.realsmelting.blocks.RSBlocks;
 import info.coremodding.realsmelting.events.RSEvents;
 import info.coremodding.realsmelting.gui.GuiHandler;
 import info.coremodding.realsmelting.items.RSItems;
+import info.coremodding.realsmelting.lib.ConfigHandler;
 import info.coremodding.realsmelting.lib.Strings;
 import info.coremodding.realsmelting.tileentities.TileEntityMagmaFrunace;
 import info.coremodding.realsmelting.tileentities.TileEntityLavaFurnace;
@@ -41,9 +43,10 @@ public class RealSmelting
 	public static ServerProxey proxey;
 	
 	@EventHandler
-	public static void PreLoad(FMLPreInitializationEvent PreEvent){
+	public static void PreLoad(FMLPreInitializationEvent event){
 		RSBlocks.mainRegistry();
 		RSItems.mainRegistry();
+		ConfigHandler.init(event.getSuggestedConfigurationFile());
 	}
 	
 	
@@ -53,8 +56,7 @@ public class RealSmelting
 		NetworkRegistry.INSTANCE.registerGuiHandler(Strings.MODID, new GuiHandler());
 		RSAchievements.registerAchievements();
 		RSEvents.registerEvents();
-		
-		GameRegistry.addRecipe(new ItemStack(RSBlocks.LavaFurnaceIdle), "   ", " x ", "   ", 'x', new ItemStack(Items.stick));
+		modrecipes.registerRecipes();
 	}
 	
 	@EventHandler

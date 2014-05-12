@@ -1,16 +1,16 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
+  "modid": "RS",
+  "name": "Real Smelting",
+  "description": "Adds realstic forging and smelting.",
+  "version": "0.1.0",
+  "mcversion": "1.7.2",
+  "url": "coremodding.info",
   "updateUrl": "",
-  "authors": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authors": ["CoreModding"],
+  "credits": "",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": [none]
 }
 ]
