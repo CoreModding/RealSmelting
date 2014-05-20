@@ -1,6 +1,7 @@
 package info.coremodding.realsmelting.tileentities;
 
 import info.coremodding.realsmelting.blocks.LavaFurnace;
+import info.coremodding.realsmelting.lib.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -213,7 +214,7 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
 				}
 			}
 		}
-		System.out.println(this.furnaceSpeed);
+		//System.out.println(this.Temp);
 		boolean flag = this.Temp > 0;
     	boolean flag1 = false;
 	
@@ -246,6 +247,8 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
     		if(this.furnaceSpeed > 16)
     			this.furnaceSpeed -= SpeedRate;
     	}
+    	if(this.furnaceSpeed <= 0)
+    		this.furnaceSpeed = 1;
 
     	if (!this.worldObj.isRemote)
         		flag1 = true;		                

@@ -1,5 +1,6 @@
 package info.coremodding.realsmelting.blocks;
 
+import info.coremodding.realsmelting.itemblocks.ItemBlockMagmaFurnace;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 
@@ -21,7 +22,7 @@ public class RSBlocks {
 	}
 	
 	public static void registerBlock() {
-		GameRegistry.registerBlock(MagmaFrunace, MagmaFrunace.getUnlocalizedName());
+		GameRegistry.registerBlock(MagmaFrunace, ItemBlockMagmaFurnace.class ,  MagmaFrunace.getUnlocalizedName());
 		GameRegistry.registerBlock(LavaFurnaceIdle, LavaFurnaceIdle.getUnlocalizedName());
 		GameRegistry.registerBlock(LavaFurnaceActive, LavaFurnaceActive.getUnlocalizedName());
 	}

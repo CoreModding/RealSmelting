@@ -7,6 +7,7 @@ import net.minecraftforge.common.config.Configuration;
 public class ConfigHandler {
 	
 	public static boolean LavaFurnaceCraft;
+
 	
 	public static void init(File configFile){
 		Configuration config = new Configuration(configFile);
