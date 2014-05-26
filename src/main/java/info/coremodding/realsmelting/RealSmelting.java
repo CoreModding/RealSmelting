@@ -10,6 +10,7 @@ import info.coremodding.realsmelting.events.RSEvents;
 import info.coremodding.realsmelting.gui.GuiHandler;
 import info.coremodding.realsmelting.items.RSItems;
 import info.coremodding.realsmelting.lib.ConfigHandler;
+import info.coremodding.realsmelting.lib.Names;
 import info.coremodding.realsmelting.lib.Strings;
 import info.coremodding.realsmelting.tileentities.TileEntityMagmaFrunace;
 import info.coremodding.realsmelting.tileentities.TileEntityLavaFurnace;
@@ -35,10 +36,7 @@ public class RealSmelting
 	@Instance(Strings.MODID)
 	public static RealSmelting instance;
 	
-	public static final int FurnaceGUIid = 1;
-	public static final int LavaFurnaceGUI = 2;
-	
-	public static CreativeTabs tabRealSmelting = new CreaticeTabRealSmelting("RealSmelting");
+	public static CreativeTabs tabRealSmelting = new CreaticeTabRealSmelting(Names.CREATIVETAB);
 	@SidedProxy(clientSide = "info.coremodding.realsmelting.ClientProxey", serverSide = "info.coremodding.realsmelting.ServerProxey")
 	public static ServerProxey proxey;
 	
@@ -61,8 +59,8 @@ public class RealSmelting
 	
 	@EventHandler
 	public static void PostLoad(FMLPostInitializationEvent PostEvent){
-		GameRegistry.registerTileEntity(TileEntityMagmaFrunace.class, "RS_Furnace");
-		GameRegistry.registerTileEntity(TileEntityLavaFurnace.class, "RS_Lava_Furnace");
+		GameRegistry.registerTileEntity(TileEntityMagmaFrunace.class, Names.TILE_MAGMA_FURNACE);
+		GameRegistry.registerTileEntity(TileEntityLavaFurnace.class, Names.TILE_LAVA_FURNACE);
 	}
     
     @EventHandler

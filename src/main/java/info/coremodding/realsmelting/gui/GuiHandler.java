@@ -1,7 +1,7 @@
 package info.coremodding.realsmelting.gui;
 
-import info.coremodding.realsmelting.RealSmelting;
 import info.coremodding.realsmelting.gui.containers.ContainerLavaFurnace;
+import info.coremodding.realsmelting.lib.GuiIds;
 import info.coremodding.realsmelting.tileentities.TileEntityLavaFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -15,7 +15,7 @@ public class GuiHandler  implements IGuiHandler{
 		TileEntity entity= world.getTileEntity(x, y, z);
 		
 		switch(ID){
-		case RealSmelting.LavaFurnaceGUI:
+		case GuiIds.LAVA_FURNACE_ID:
 			if(entity instanceof TileEntityLavaFurnace){
 				return new ContainerLavaFurnace(player.inventory, (TileEntityLavaFurnace) entity);	
 			}
@@ -30,7 +30,7 @@ public class GuiHandler  implements IGuiHandler{
 		TileEntity entity= world.getTileEntity(x, y, z);
 		
 		switch(ID){
-		case RealSmelting.LavaFurnaceGUI:
+		case GuiIds.LAVA_FURNACE_ID:
 			if(entity instanceof TileEntityLavaFurnace){
 				return new GuiLavaFurnace(player.inventory, (TileEntityLavaFurnace) entity);
 				}

@@ -3,6 +3,8 @@ package info.coremodding.realsmelting.blocks;
 import java.util.List;
 
 import info.coremodding.realsmelting.RealSmelting;
+import info.coremodding.realsmelting.lib.GuiIds;
+import info.coremodding.realsmelting.lib.Names;
 import info.coremodding.realsmelting.tileentities.TileEntityLavaFurnace;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -34,11 +36,11 @@ public class LavaFurnace extends BlockContainer {
 		this.isActive = isActive;
 		this.setHardness(2.5F);
 		if(isActive){
-			this.setBlockName("LavaFurnaceActive");
+			this.setBlockName(Names.LAVA_FURNACE_ACTIVE);
 			this.setLightLevel(0.9F);
 		}
 		if(!isActive){
-			this.setBlockName("LavaFurnaceIdle");
+			this.setBlockName(Names.LAVA_FURNACE_IDLE);
 			this.setCreativeTab(RealSmelting.tabRealSmelting);
 		}
 	}
@@ -50,7 +52,7 @@ public class LavaFurnace extends BlockContainer {
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitx, float hity, float hitz) {
 		if (!world.isRemote) {
-			FMLNetworkHandler.openGui(player, RealSmelting.instance, RealSmelting.LavaFurnaceGUI, world, x, y, z);
+			FMLNetworkHandler.openGui(player, RealSmelting.instance, GuiIds.LAVA_FURNACE_ID, world, x, y, z);
 		}
 		return true;
 	}
