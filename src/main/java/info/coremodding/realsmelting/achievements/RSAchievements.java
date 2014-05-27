@@ -4,6 +4,7 @@ import info.coremodding.realsmelting.blocks.RSBlocks;
 import net.minecraft.item.Item;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.AchievementPage;
 
 public class RSAchievements {
@@ -16,7 +17,7 @@ public class RSAchievements {
 		achievementMagmaFurnace  = new Achievement("achievement.magmafurnace", "magmaFurnace", 2, 1, RSBlocks.MagmaFrunace, RSAchievements.achievementLavaFurnace).setSpecial().registerStat();
 		
 		
-		AchievementPage.registerAchievementPage(new AchievementPage("Real Smelting", new Achievement[]{achievementLavaFurnace, achievementMagmaFurnace}));
+		AchievementPage.registerAchievementPage(new AchievementPage(StatCollector.translateToLocal("achievements.page"), new Achievement[]{achievementLavaFurnace, achievementMagmaFurnace}));
 	}
 
 }

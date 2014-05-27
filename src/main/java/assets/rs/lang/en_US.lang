@@ -4,3 +4,5 @@ achievement.lavaFurnace=Lava Power
 achievement.lavaFurnace.desc=Craft a lava furnace
 achievement.magmaFurnace=Time for a upgrade
 achievement.magmaFurnace.desc=Craft a magma furnace
+achievements.page=Real Smelting
+itemGroup.RealSmelting=Real Smelting

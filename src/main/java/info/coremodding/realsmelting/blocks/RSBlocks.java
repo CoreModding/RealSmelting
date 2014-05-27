@@ -23,7 +23,7 @@ public class RSBlocks {
 	}
 	
 	public static void registerBlock() {
-		GameRegistry.registerBlock(MagmaFrunace, ItemBlockMagmaFurnace.class ,  Names.MAGMA_FURNACE);
+		GameRegistry.registerBlock(MagmaFrunace, ItemBlockMagmaFurnace.class , Names.MAGMA_FURNACE);
 		GameRegistry.registerBlock(LavaFurnaceIdle, Names.LAVA_FURNACE_IDLE);
 		GameRegistry.registerBlock(LavaFurnaceActive, Names.LAVA_FURNACE_ACTIVE);
 	}
