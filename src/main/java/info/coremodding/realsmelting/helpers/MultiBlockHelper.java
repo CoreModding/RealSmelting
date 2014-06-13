@@ -53,21 +53,22 @@ public class MultiBlockHelper
         return false;
     }
     
-    private static boolean checkNorth(World world, int x, int y, int z)
-    {
-        if (world.getBlock(x + 0, y + 0, z + -1) instanceof BlockFurnace)
-        {
-            if (world.getBlock(x + 0, y + 1, z + 0) instanceof BlockFurnace)
-            {
-                if (world.getBlock(x + 0, y + 1, z + -1) instanceof BlockFurnace)
-                {
-                    if (world.getBlock(x + 1, y + 0, z + 0) instanceof BlockFurnace)
-                    {
-                        if (world.getBlock(x + 1, y + 0, z + -1) instanceof BlockFurnace)
-                        {
-                            if (world.getBlock(x + 1, y + 1, z + 0) instanceof BlockFurnace)
-                            {
-                                if (world.getBlock(x + 1, y + 1, z + -1) instanceof BlockFurnace) { return true; }
+    private static boolean checkNorth(World world, int x, int y, int z){
+        if (world.getBlock(x + 0, y + 0, z + -1) instanceof BlockFurnace){
+        	
+            if (world.getBlock(x + 0, y + 1, z + 0) instanceof BlockFurnace){
+            	
+                if (world.getBlock(x + 0, y + 1, z + -1) instanceof BlockFurnace){
+                	
+                    if (world.getBlock(x + 1, y + 0, z + 0) instanceof BlockFurnace){
+                    	
+                        if (world.getBlock(x + 1, y + 0, z + -1) instanceof BlockFurnace){
+                        	
+                            if (world.getBlock(x + 1, y + 1, z + 0) instanceof BlockFurnace){
+                            	
+                                if (world.getBlock(x + 1, y + 1, z + -1) instanceof BlockFurnace){
+                                	return true;
+                                	}
                             }
                         }
                     }

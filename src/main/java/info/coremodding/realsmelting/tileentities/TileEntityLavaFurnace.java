@@ -38,28 +38,13 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
 
 	private int smeltItem;
 	
-	/**
-	 * 
-	 * @param slots 
-	 * 				The number of slots
-	 * @param Temp 
-	 * 				The starting temperature of the furnace
-	 * @param MaxTemp 
-	 * 				The max temperature of the furnace
-	 * @param furnaceSpeeed 
-	 * 				The starting speed of the furnace
-	 * @param TempRate
-	 * 				The amount the temperature increase or decreases
-	 * @param SpeedRate
-	 * 				The amount the furnace speed increase or decreases
-	 */
-	public TileEntityLavaFurnace(int slots, float Temp, float MaxTemp, int furnaceSpeeed, float TempRate, int SpeedRate){
-		this.Temp = Temp;
-		this.furnaceSpeed = furnaceSpeeed;
-		this.MaxTemp = MaxTemp;
-		this.slots = new ItemStack[slots];
-		this.TempRate = TempRate;
-		this.SpeedRate = SpeedRate;
+	public TileEntityLavaFurnace(){
+		this.Temp = 0;
+		this.furnaceSpeed = 250;
+		this.MaxTemp = 1000;
+		this.slots = new ItemStack[2];
+		this.TempRate = 0.01F;
+		this.SpeedRate = 12;
 	}
 
 	@Override
@@ -352,7 +337,7 @@ public class TileEntityLavaFurnace extends TileEntity implements ISidedInventory
 	}
 
 	public String getInvName() {
-		return "container.IronOxideFurnace";
+		return "container.LavaFurnace";
 	}
 
 	public void setGuiDisplayName(String displayName) {

@@ -1,5 +1,7 @@
 package info.coremodding.realsmelting.tileentities;
 
+import info.coremodding.realsmelting.helpers.MultiBlockHelper;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -156,6 +158,9 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
             }
             i++;
         }
+        
+        if(MultiBlockHelper.isMultiBlockStructure(worldObj, this.xCoord, this.yCoord, this.zCoord))
+        	System.out.println("check");
     }
     
     @Override
