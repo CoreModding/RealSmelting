@@ -3,6 +3,7 @@ package info.coremodding.realsmelting.blocks;
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import info.coremodding.realsmelting.RealSmelting;
 import info.coremodding.realsmelting.helpers.MultiBlockHelper;
+import info.coremodding.realsmelting.lib.GuiIds;
 import info.coremodding.realsmelting.tileentities.FurnaceEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -29,7 +30,7 @@ class BlockFurnace extends BlockContainer
     	if(!world.isRemote){
     		if(!player.isSneaking()){
     			if(MultiBlockHelper.isMultiBlockStructure(world, x, y, z)){
-    				FMLNetworkHandler.openGui(player, RealSmelting.instance, RealSmelting.FurnaceGUIid, world, x, y, z);
+    				FMLNetworkHandler.openGui(player, RealSmelting.instance, GuiIds.LAVA_FURNACE_ID, world, x, y, z);
     				System.out.println("hi");
     			}
     		}

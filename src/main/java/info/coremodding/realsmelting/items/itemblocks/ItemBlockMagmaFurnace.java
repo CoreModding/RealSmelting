@@ -17,22 +17,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Real Smelting.  If not, see <http://www.gnu.org/licenses/>.
  */
-package info.coremodding.realsmelting.lib;
+package info.coremodding.realsmelting.items.itemblocks;
 
-public class Names {
+import java.util.List;
+
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+
+public class ItemBlockMagmaFurnace extends ItemBlock{
+
+	public ItemBlockMagmaFurnace(Block block) {
+		super(block);
+	}
 	
-	//Blocks
-	public static final String LAVA_FURNACE_IDLE = "LavaFurnaceIdle";
-	public static final String LAVA_FURNACE_ACTIVE = "LavaFurnaceActive";
-	public static final String MAGMA_FURNACE = "MagmaFrunace";
-
-	//Items
-	
-	//TileEntitys
-	public static final String TILE_LAVA_FURNACE = "RS_MAGMA_Furnace";
-	public static final String TILE_MAGMA_FURNACE = "RS_Lava_Furnace";
-
-	//Misc
-	public static final String CREATIVETAB = "RealSmelting";
+	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean par1){
+		list.add("2x2x2 MultiBlock");
+	}
 
 }
