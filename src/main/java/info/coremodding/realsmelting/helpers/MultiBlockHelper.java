@@ -1,5 +1,6 @@
 package info.coremodding.realsmelting.helpers;
 
+import info.coremodding.realsmelting.blocks.MagmaFrunace;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.world.World;
 
@@ -54,19 +55,20 @@ public class MultiBlockHelper
     }
     
     private static boolean checkNorth(World world, int x, int y, int z){
-        if (world.getBlock(x + 0, y + 0, z + -1) instanceof BlockFurnace){
-        	
-            if (world.getBlock(x + 0, y + 1, z + 0) instanceof BlockFurnace){
-            	
-                if (world.getBlock(x + 0, y + 1, z + -1) instanceof BlockFurnace){
-                	
-                    if (world.getBlock(x + 1, y + 0, z + 0) instanceof BlockFurnace){
-                    	
-                        if (world.getBlock(x + 1, y + 0, z + -1) instanceof BlockFurnace){
-                        	
-                            if (world.getBlock(x + 1, y + 1, z + 0) instanceof BlockFurnace){
-                            	
-                                if (world.getBlock(x + 1, y + 1, z + -1) instanceof BlockFurnace){
+        if (world.getBlock(x, y, z -1) instanceof MagmaFrunace){
+
+            if (world.getBlock(x, y + 1, z) instanceof MagmaFrunace){
+
+                if (world.getBlock(x, y + 1, z -1) instanceof MagmaFrunace){
+
+                    if (world.getBlock(x + 1, y, z) instanceof MagmaFrunace){
+
+                        if (world.getBlock(x + 1, y, z -1) instanceof MagmaFrunace){
+
+                            if (world.getBlock(x + 1, y + 1, z) instanceof MagmaFrunace){
+
+                                if (world.getBlock(x + 1, y + 1, z -1) instanceof MagmaFrunace){
+
                                 	return true;
                                 	}
                             }
@@ -80,19 +82,19 @@ public class MultiBlockHelper
     
     private static boolean checkEast(World world, int x, int y, int z)
     {
-        if (world.getBlock(x + 1, y + 0, z + 0) instanceof BlockFurnace)
+        if (world.getBlock(x + 1, y + 0, z + 0) instanceof MagmaFrunace)
         {
-            if (world.getBlock(x + 0, y + 1, z + 0) instanceof BlockFurnace)
+            if (world.getBlock(x + 0, y + 1, z + 0) instanceof MagmaFrunace)
             {
-                if (world.getBlock(x + 1, y + 1, z + 0) instanceof BlockFurnace)
+                if (world.getBlock(x + 1, y + 1, z + 0) instanceof MagmaFrunace)
                 {
-                    if (world.getBlock(x + 0, y + 0, z + 1) instanceof BlockFurnace)
+                    if (world.getBlock(x + 0, y + 0, z + 1) instanceof MagmaFrunace)
                     {
-                        if (world.getBlock(x + 1, y + 0, z + 1) instanceof BlockFurnace)
+                        if (world.getBlock(x + 1, y + 0, z + 1) instanceof MagmaFrunace)
                         {
-                            if (world.getBlock(x + 0, y + 1, z + 1) instanceof BlockFurnace)
+                            if (world.getBlock(x + 0, y + 1, z + 1) instanceof MagmaFrunace)
                             {
-                                if (world.getBlock(x + 1, y + 1, z + 1) instanceof BlockFurnace) { return true; }
+                                if (world.getBlock(x + 1, y + 1, z + 1) instanceof MagmaFrunace) { return true; }
                             }
                         }
                     }
@@ -104,19 +106,19 @@ public class MultiBlockHelper
     
     private static boolean checkSouth(World world, int x, int y, int z)
     {
-        if (world.getBlock(x + 0, y + 0, z + 1) instanceof BlockFurnace)
+        if (world.getBlock(x + 0, y + 0, z + 1) instanceof MagmaFrunace)
         {
-            if (world.getBlock(x + 0, y + 1, z + 0) instanceof BlockFurnace)
+            if (world.getBlock(x + 0, y + 1, z + 0) instanceof MagmaFrunace)
             {
-                if (world.getBlock(x + 0, y + 1, z + 1) instanceof BlockFurnace)
+                if (world.getBlock(x + 0, y + 1, z + 1) instanceof MagmaFrunace)
                 {
-                    if (world.getBlock(x + -1, y + 0, z + 0) instanceof BlockFurnace)
+                    if (world.getBlock(x + -1, y + 0, z + 0) instanceof MagmaFrunace)
                     {
-                        if (world.getBlock(x + -1, y + 0, z + 1) instanceof BlockFurnace)
+                        if (world.getBlock(x + -1, y + 0, z + 1) instanceof MagmaFrunace)
                         {
-                            if (world.getBlock(x + -1, y + 1, z + 0) instanceof BlockFurnace)
+                            if (world.getBlock(x + -1, y + 1, z + 0) instanceof MagmaFrunace)
                             {
-                                if (world.getBlock(x + -1, y + 1, z + 1) instanceof BlockFurnace) { return true; }
+                                if (world.getBlock(x + -1, y + 1, z + 1) instanceof MagmaFrunace) { return true; }
                             }
                         }
                     }
@@ -128,19 +130,19 @@ public class MultiBlockHelper
     
     private static boolean checkWest(World world, int x, int y, int z)
     {
-        if (world.getBlock(x + -1, y + 0, z + 0) instanceof BlockFurnace)
+        if (world.getBlock(x + -1, y + 0, z + 0) instanceof MagmaFrunace)
         {
-            if (world.getBlock(x + 0, y + 1, z + 0) instanceof BlockFurnace)
+            if (world.getBlock(x + 0, y + 1, z + 0) instanceof MagmaFrunace)
             {
-                if (world.getBlock(x + -1, y + 1, z + 0) instanceof BlockFurnace)
+                if (world.getBlock(x + -1, y + 1, z + 0) instanceof MagmaFrunace)
                 {
-                    if (world.getBlock(x + 0, y + 0, z + -1) instanceof BlockFurnace)
+                    if (world.getBlock(x + 0, y + 0, z + -1) instanceof MagmaFrunace)
                     {
-                        if (world.getBlock(x + -1, y + 0, z + -1) instanceof BlockFurnace)
+                        if (world.getBlock(x + -1, y + 0, z + -1) instanceof MagmaFrunace)
                         {
-                            if (world.getBlock(x + 0, y + 1, z + -1) instanceof BlockFurnace)
+                            if (world.getBlock(x + 0, y + 1, z + -1) instanceof MagmaFrunace)
                             {
-                                if (world.getBlock(x + -1, y + 1, z + -1) instanceof BlockFurnace) { return true; }
+                                if (world.getBlock(x + -1, y + 1, z + -1) instanceof MagmaFrunace) { return true; }
                             }
                         }
                     }
