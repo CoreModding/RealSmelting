@@ -12,11 +12,16 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
 
 /**
  * @author James The furnace tile entity
  */
-public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventory{
+public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventory, IFluidHandler{
     
     private ItemStack[] que;
     private ItemStack[] smelted;
@@ -159,8 +164,8 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
             i++;
         }
         
-        if(MultiBlockHelper.isMultiBlockStructure(worldObj, this.xCoord, this.yCoord, this.zCoord))
-        	System.out.println("check");
+       // if(MultiBlockHelper.isMultiBlockStructure(worldObj, this.xCoord, this.yCoord, this.zCoord))
+        	//System.out.println("check");
     }
     
     @Override
@@ -247,8 +252,7 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer var1) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -286,4 +290,34 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+    @Override
+    public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+        return 0;
+    }
+
+    @Override
+    public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+        return null;
+    }
+
+    @Override
+    public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+        return null;
+    }
+
+    @Override
+    public boolean canFill(ForgeDirection from, Fluid fluid) {
+        return false;
+    }
+
+    @Override
+    public boolean canDrain(ForgeDirection from, Fluid fluid) {
+        return false;
+    }
+
+    @Override
+    public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+        return new FluidTankInfo[0];
+    }
 }

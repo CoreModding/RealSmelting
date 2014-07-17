@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 /**
  * @author James The furnace block
  */
-class MagmaFrunace extends BlockContainer
+public class MagmaFrunace extends BlockContainer
 {
     
     protected MagmaFrunace()
@@ -32,6 +32,7 @@ class MagmaFrunace extends BlockContainer
     		if(!player.isSneaking()){
     			if(MultiBlockHelper.isMultiBlockStructure(world, x, y, z)){
     				FMLNetworkHandler.openGui(player, RealSmelting.instance, GuiIds.MAGMA_FURNACE_ID, world, x, y, z);
+                    System.out.println("MULTIBLOCK!!!!!!!!!!");
     			}
     		}
     	}

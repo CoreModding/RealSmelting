@@ -20,8 +20,10 @@
 package info.coremodding.realsmelting.gui;
 
 import info.coremodding.realsmelting.gui.containers.ContainerLavaFurnace;
+import info.coremodding.realsmelting.gui.containers.ContainerMagmaFurnace;
 import info.coremodding.realsmelting.lib.GuiIds;
 import info.coremodding.realsmelting.tileentities.TileEntityLavaFurnace;
+import info.coremodding.realsmelting.tileentities.TileEntityMagmaFrunace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -38,9 +40,12 @@ public class GuiHandler  implements IGuiHandler{
 			if(entity instanceof TileEntityLavaFurnace){
 				return new ContainerLavaFurnace(player.inventory, (TileEntityLavaFurnace) entity);	
 			}
-		
+
+            case GuiIds.MAGMA_FURNACE_ID:
+                if(entity instanceof TileEntityMagmaFrunace){
+                    return new ContainerMagmaFurnace(player.inventory, (TileEntityMagmaFrunace) entity);
+                }
 		}
-		
 		return null;
 	}
 
@@ -52,7 +57,13 @@ public class GuiHandler  implements IGuiHandler{
 		case GuiIds.LAVA_FURNACE_ID:
 			if(entity instanceof TileEntityLavaFurnace){
 				return new GuiLavaFurnace(player.inventory, (TileEntityLavaFurnace) entity);
-				}
+		    }
+
+
+        case GuiIds.MAGMA_FURNACE_ID:
+            if(entity instanceof TileEntityMagmaFrunace){
+                 return new GuiMagmaFurnace(player.inventory, (TileEntityMagmaFrunace) entity);
+             }
 		
 		}
 		
