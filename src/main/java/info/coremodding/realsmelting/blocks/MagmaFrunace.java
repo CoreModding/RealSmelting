@@ -41,13 +41,13 @@ public class MagmaFrunace extends BlockContainer
     
     @Override
     public TileEntity createNewTileEntity(World var1, int var2){
-        return new TileEntityMagmaFrunace(20);
+        return new TileEntityMagmaFrunace(30, 100);
     }
     
     @Override
     public void onNeighborBlockChange(World world, int i, int j, int k, Block block) {
         if(MultiBlockHelper.isMultiBlockStructure(world, i, j, k) && !MultiBlockHelper.doesHaveTileEntity(world, i, j, k)){
-            world.setTileEntity(i, j, k, new TileEntityMagmaFrunace(9, 100));
+            world.setTileEntity(i, j, k, new TileEntityMagmaFrunace(30, 100));
         } else if(!MultiBlockHelper.isMultiBlockStructure(world, i, j, k)) {
             world.removeTileEntity(i, j, k);
         }

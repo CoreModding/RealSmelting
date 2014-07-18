@@ -26,23 +26,10 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
     private ItemStack[] que;
     private ItemStack[] smelted;
     private ItemStack[] smelting;
+    private ItemStack[] inventory;
     
     private int[]       smelt_progress;
     private final int   smelt_time;
-    
-    /**
-     * The tertiary constructor
-     * 
-     * @param ticks
-     *            The ticks it takes to cook something
-     */
-    public TileEntityMagmaFrunace(int ticks)
-    {
-        this.que = new ItemStack[1];
-        this.smelted = new ItemStack[1];
-        this.smelting = new ItemStack[1];
-        this.smelt_time = ticks;
-    }
     
     /**
      * The secondary constructor
@@ -56,6 +43,7 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
     {
         this.que = new ItemStack[slots];
         this.smelted = new ItemStack[slots];
+        this.inventory = new ItemStack[slots];
         this.smelting = new ItemStack[1];
         this.smelt_time = ticks;
     }
@@ -74,6 +62,7 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
     {
         this.que = new ItemStack[slots];
         this.smelted = new ItemStack[slots];
+        this.inventory = new ItemStack[slots];
         this.smelting = new ItemStack[at_once];
         this.smelt_progress = new int[at_once];
         this.smelt_time = ticks;
@@ -204,50 +193,65 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
 
 	@Override
 	public int getSizeInventory() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.inventory.length;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int var1) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.inventory[var1];
 	}
 
 	@Override
 	public ItemStack decrStackSize(int var1, int var2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        if(this.inventory[var1] != null){
+            ItemStack itemstack;
+            if(this.inventory[var1].stackSize <= var2){
+                itemstack = this.inventory[var1];
+                this.inventory[var1] = null;
+                return itemstack;
+            }else{
+                itemstack = this.inventory[var1].splitStack(var2);
+                if(this.inventory[var1].stackSize == 0){
+                    this.inventory[var1] = null;
+                }
+                return itemstack;
+            }
+        }
+        return null;	}
 
-	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public ItemStack getStackInSlotOnClosing(int slot) {
+        if(this.inventory[slot] != null){
+            ItemStack itemstack = this.inventory[slot];
+            this.inventory[slot] = null;
+            return itemstack;
+        }
 
-	@Override
-	public void setInventorySlotContents(int var1, ItemStack var2) {
-		// TODO Auto-generated method stub
-		
-	}
+        return null;
+    }
+
+    @Override
+    public void setInventorySlotContents(int slot, ItemStack itemStack) {
+        this.inventory[slot]= itemStack;
+
+        if(itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()){
+            itemStack.stackSize = this.getInventoryStackLimit();
+        }
+    }
 
 	@Override
 	public String getInventoryName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean hasCustomInventoryName() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public int getInventoryStackLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 64;
 	}
 
 	@Override
@@ -256,38 +260,28 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
 	}
 
 	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void openInventory() {}
 
 	@Override
-	public void closeInventory() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void closeInventory() {}
 
 	@Override
 	public boolean isItemValidForSlot(int var1, ItemStack var2) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean canInsertItem(int var1, ItemStack var2, int var3) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean canExtractItem(int var1, ItemStack var2, int var3) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
