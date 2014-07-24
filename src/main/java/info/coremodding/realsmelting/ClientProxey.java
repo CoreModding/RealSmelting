@@ -19,10 +19,20 @@
  */
 package info.coremodding.realsmelting;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
+import info.coremodding.realsmelting.blocks.RSBlocks;
+import info.coremodding.realsmelting.renderer.item.ItemRendererMagmaFurnace;
+import info.coremodding.realsmelting.renderer.tileentity.TileEntityRendererMagmaFurnace;
+import info.coremodding.realsmelting.tileentities.TileEntityMagmaFrunace;
+import net.minecraft.item.Item;
+import net.minecraftforge.client.MinecraftForgeClient;
+
 public class ClientProxey extends ServerProxey{
 	
 	public void registerRenderThings(){
-		
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMagmaFrunace.class, new TileEntityRendererMagmaFurnace());
+
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(RSBlocks.MagmaFrunace), new ItemRendererMagmaFurnace());
 	}
 
 }

@@ -1,6 +1,5 @@
 package info.coremodding.realsmelting.blocks;
 
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import info.coremodding.realsmelting.RealSmelting;
 import info.coremodding.realsmelting.helpers.MultiBlockHelper;
 import info.coremodding.realsmelting.lib.GuiIds;
@@ -9,7 +8,6 @@ import info.coremodding.realsmelting.tileentities.TileEntityMagmaFrunace;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -17,26 +15,48 @@ import net.minecraft.world.World;
 /**
  * @author James The furnace block
  */
-public class MagmaFrunace extends BlockContainer
-{
+public class MagmaFrunace extends BlockContainer{
     
-    protected MagmaFrunace()
-    {
+    public MagmaFrunace(){
         super(Material.rock);
         this.setBlockName(Names.MAGMA_FURNACE);
         this.setCreativeTab(RealSmelting.tabRealSmelting);
     }
-    
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+
+    @Override
+    public int getRenderType() {
+        return -1;
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitx, float hity, float hitz) {
-    	if(!world.isRemote){
-    		if(!player.isSneaking()){
-    			if(MultiBlockHelper.isMultiBlockStructure(world, x, y, z)){
-    				FMLNetworkHandler.openGui(player, RealSmelting.instance, GuiIds.MAGMA_FURNACE_ID, world, x, y, z);
-                    System.out.println("MULTIBLOCK!!!!!!!!!!");
-    			}
-    		}
-    	}
-    	return true;
+        if (!world.isRemote) {
+            if (!player.isSneaking()) {
+                TileEntityMagmaFrunace tile = (TileEntityMagmaFrunace) world.getTileEntity(x, y, z);
+                if (tile != null) {
+                    if (tile.hasMaster()) {
+                        if (tile.isMaster()) {
+                            System.out.println("is Master");
+                            player.openGui(RealSmelting.instance, GuiIds.MAGMA_FURNACE_ID, world, x, y, z);
+                        }else {
+                            System.out.println("not master");
+                            player.openGui(RealSmelting.instance, GuiIds.MAGMA_FURNACE_ID, world, tile.getMasterX(), tile.getMasterY(), tile.getMasterZ());
+                        }
+                            return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
     
     @Override

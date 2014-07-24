@@ -26,6 +26,48 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
     private ItemStack[] smelting;
     private ItemStack[] inventory;
 
+    private boolean isMaster, hasMaster;
+    private int masterX, masterY, masterZ;
+
+    public boolean isMaster() {
+        return isMaster;
+    }
+
+    public boolean hasMaster() {
+        return hasMaster;
+    }
+
+    public int getMasterX() {
+        return masterX;
+    }
+
+    public int getMasterY() {
+        return masterY;
+    }
+
+    public int getMasterZ() {
+        return masterZ;
+    }
+
+    public void reset() {
+        masterX = 0;
+        masterY = 0;
+        masterZ = 0;
+        hasMaster = false;
+        isMaster = false;
+    }
+
+    public void setMaster(int x, int y, int z, boolean isMaster) {
+        TileEntity tile = worldObj.getTileEntity(x, y, z);
+        if (tile != null && (tile instanceof TileEntityMagmaFrunace)) {
+            masterX = x;
+            masterY = y;
+            masterZ = z;
+            hasMaster = true;
+            this.isMaster = isMaster;
+        }
+    }
+
     public static FluidTank[] tanks;
     
     private int[]       smelt_progress;
@@ -113,28 +155,21 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
     }
     
     @Override
-    public void updateEntity()
-    {
+    public void updateEntity() {
         int i = 0;
         int emptyend = 0;
-        for (ItemStack item : this.smelted)
-        {
+        for (ItemStack item : this.smelted) {
             if (item == null) emptyend++;
         }
-        for (ItemStack item : this.smelting)
-        {
-            if (item != null && emptyend > 0)
-            {
+        for (ItemStack item : this.smelting) {
+            if (item != null && emptyend > 0) {
                 emptyend++;
                 this.smelt_progress[i]++;
-                if (this.smelt_progress[i] > this.smelt_time)
-                {
+                if (this.smelt_progress[i] > this.smelt_time) {
                     this.smelting[i] = null;
                     int i2 = 0;
-                    for (ItemStack item2 : this.smelted)
-                    {
-                        if (item2 == null)
-                        {
+                    for (ItemStack item2 : this.smelted) {
+                        if (item2 == null) {
                             this.smelted[i2] = item;
                         }
                         i2++;
@@ -142,16 +177,12 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
                     this.smelt_progress[i] = 0;
                 }
             }
-            if (item == null)
-            {
+            if (item == null) {
                 int i2 = 0;
-                for (ItemStack item2 : this.que)
-                {
-                    if (item2 != null)
-                    {
+                for (ItemStack item2 : this.que) {
+                    if (item2 != null) {
                         item2.stackSize--;
-                        if (item2.stackSize == 0)
-                        {
+                        if (item2.stackSize == 0) {
                             this.que[i2] = null;
                         }
                         this.smelting[i] = new ItemStack(item2.getItem(), 1);
@@ -162,43 +193,81 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
             }
             i++;
         }
-        if(inventory[19] != null) {
-            if (inventory[19].getItem() == Items.lava_bucket) {
-                if (inventory[20] == null) {
-                    if(tanks[0].getFluidAmount() < tanks[0].getCapacity())
-                        setInventorySlotContents(1, new ItemStack(Items.bucket));
-                    if(tanks[0].getFluid() == null) {
-                        tanks[0].fill(new FluidStack(FluidRegistry.LAVA, 1000), true);
-                    }else if(tanks[0].getFluidAmount() < tanks[0].getCapacity()){
-                        if(tanks[0].getFluidAmount() < tanks[0].getCapacity())
-                            tanks[0].getFluid().amount += 1000;
-                    }
-                    if(tanks[0].getFluidAmount() < tanks[0].getCapacity()) {
-                        inventory[19].stackSize--;
-                        if (inventory[19].stackSize == 0)
-                            inventory[19] = null;
-                    }
+        if (!worldObj.isRemote) {
+            if (hasMaster()) {
+                if (isMaster()) {
+                    if (!checkMultiBlockForm())
+                        resetMultiBlockStructure();
+                    if (inventory[19] != null) {
+                        if (inventory[19].getItem() == Items.lava_bucket) {
+                            if (inventory[20] == null) {
+                                if (tanks[0].getFluidAmount() < tanks[0].getCapacity())
+                                    setInventorySlotContents(20, new ItemStack(Items.bucket));
+                                if (tanks[0].getFluid() == null) {
+                                    tanks[0].fill(new FluidStack(FluidRegistry.LAVA, 1000), true);
+                                } else if (tanks[0].getFluidAmount() < tanks[0].getCapacity()) {
+                                    if (tanks[0].getFluidAmount() < tanks[0].getCapacity())
+                                        tanks[0].getFluid().amount += 1000;
+                                }
+                                if (tanks[0].getFluidAmount() < tanks[0].getCapacity()) {
+                                    inventory[19].stackSize--;
+                                    if (inventory[19].stackSize == 0)
+                                        inventory[19] = null;
+                                }
 
 
+                            } else {
+                                if (tanks[0].getFluidAmount() < tanks[0].getCapacity()) {
+                                    inventory[19].stackSize--;
+                                    if (inventory[19].stackSize == 0)
+                                        inventory[19] = null;
+                                    inventory[20].stackSize++;
+                                }
+
+                                if (tanks[0].getFluid() == null) {
+                                    tanks[0].fill(new FluidStack(FluidRegistry.LAVA, 1000), true);
+                                } else if (tanks[0].getFluidAmount() < tanks[0].getCapacity()) {
+                                    tanks[0].getFluid().amount += 1000;
+                                }
+                            }
+                        }
+                    }
                 } else {
-                    if(tanks[0].getFluidAmount() < tanks[0].getCapacity()) {
-                        inventory[19].stackSize--;
-                        if (inventory[19].stackSize == 0)
-                            inventory[19] = null;
-                        inventory[20].stackSize++;
-                    }
-
-                    if(tanks[0].getFluid() == null) {
-                        tanks[0].fill(new FluidStack(FluidRegistry.LAVA, 1000), true);
-                    }else if(tanks[0].getFluidAmount() < tanks[0].getCapacity()){
-                        tanks[0].getFluid().amount += 1000;
-                        System.out.println(tanks[0].getFluidAmount());
-                    }
+                    if (!checkForMaster())
+                        resetMultiBlockStructure();
+                }
+            } else {
+                if (checkMultiBlockForm()) {
+                    setupMultiBlockStructure();
                 }
             }
         }
     }
-    
+
+    public boolean checkForMaster() {
+        TileEntity tile = worldObj.getTileEntity(masterX, masterY, masterZ);
+        return (tile != null && (tile instanceof TileEntityMagmaFrunace));
+    }
+
+    public void setupMultiBlockStructure() {
+        for (int x = xCoord; x < xCoord + 2; x++)
+            for (int y = yCoord; y < yCoord + 2; y++)
+                for (int z = zCoord; z < zCoord + 2; z++) {
+                    boolean master = (x == xCoord && y == yCoord && z == zCoord);
+                    TileEntity tile = worldObj.getTileEntity(x, y, z);
+                    if (tile != null && (tile instanceof TileEntityMagmaFrunace))
+                        ((TileEntityMagmaFrunace) tile).setMaster(xCoord, yCoord, zCoord, master);
+                }
+    }
+
+    private void resetMultiBlockStructure() {
+        reset();
+    }
+
+    private boolean checkMultiBlockForm() {
+        return MultiBlockHelper.isMultiBlockStructure(worldObj, xCoord, yCoord, zCoord);
+    }
+
     @Override
     public void writeToNBT(NBTTagCompound nbt)
     {

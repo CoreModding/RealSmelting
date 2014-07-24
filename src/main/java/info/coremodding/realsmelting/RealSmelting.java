@@ -45,9 +45,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 
 @Mod(modid = Strings.MODID, name = Strings.name , version = Strings.version)
-
-public class RealSmelting
-{
+public class RealSmelting{
 	
 	@Instance(Strings.MODID)
 	public static RealSmelting instance;
@@ -62,15 +60,15 @@ public class RealSmelting
 		RSItems.mainRegistry();
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
 	}
-	
-	
-	
+
 	@EventHandler
 	public static void load(FMLInitializationEvent event){
 		NetworkRegistry.INSTANCE.registerGuiHandler(Strings.MODID, new GuiHandler());
 		RSAchievements.registerAchievements();
 		RSEvents.registerEvents();
 		modrecipes.registerRecipes();
+
+        proxey.registerRenderThings();
 	}
 	
 	@EventHandler
