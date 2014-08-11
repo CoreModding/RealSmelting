@@ -10,12 +10,12 @@ public class ItemRendererMagmaFurnace implements IItemRenderer {
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
-        return false;
+        return true;
     }
 
     @Override

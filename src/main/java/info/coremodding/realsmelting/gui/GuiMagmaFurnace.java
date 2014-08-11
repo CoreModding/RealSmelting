@@ -36,10 +36,10 @@ public class GuiMagmaFurnace extends GuiContainer{
 
 
         List<String> text = new ArrayList<String>();
-        if (entity.tanks[0].getFluidAmount() > 0 || (entity.tanks[0].getFluid() != null)) {
+        if (entity.tank.getFluidAmount() > 0 || (entity.tank.getFluid() != null)) {
             text.clear();
-            text.add(entity.tanks[0].getFluid().getFluid().getUnlocalizedName());
-            text.add(entity.tanks[0].getFluidAmount() + "/" + entity.tanks[0].getCapacity() + "mB");
+            text.add(entity.tank.getFluid().getFluid().getUnlocalizedName());
+            text.add(entity.tank.getFluidAmount() + "/" + entity.tank.getCapacity() + "mB");
             drawToolTipOverArea(mouseX, mouseY, 73, 16, 83, 67, text, fontRendererObj);
         } else {
             text.clear();
@@ -60,9 +60,9 @@ public class GuiMagmaFurnace extends GuiContainer{
 
     public void drawTanks() {
         int j;
-        if (entity.tanks[0].getFluid() != null) {
-            j = getValueScaled(entity.tanks[0].getFluidAmount(), entity.tanks[0].getCapacity(), 52);
-            this.drawFluid(guiLeft + 73, guiTop + 68 - j, entity.tanks[0].getFluid(), 11, j);
+        if (entity.tank.getFluid() != null) {
+            j = getValueScaled(entity.tank.getFluidAmount(), entity.tank.getCapacity(), 52);
+            this.drawFluid(guiLeft + 73, guiTop + 68 - j, entity.tank.getFluid(), 11, j);
         }
 
     }
@@ -77,8 +77,6 @@ public class GuiMagmaFurnace extends GuiContainer{
 
         super.handleMouseInput();
     }
-
-
 
     public int getValueScaled(int value, int max, int scale) {
         return (value * scale) / max;

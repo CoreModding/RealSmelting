@@ -4,11 +4,15 @@ import info.coremodding.realsmelting.tileentities.TileEntityMagmaFrunace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class ContainerMagmaFurnace extends Container{
 
     private TileEntityMagmaFrunace tileEntity;
+
+    private int lastTankAmount;
 
     public ContainerMagmaFurnace(InventoryPlayer inventory, TileEntityMagmaFrunace entity) {
         this.tileEntity = entity;
@@ -56,5 +60,39 @@ public class ContainerMagmaFurnace extends Container{
     @Override
     public boolean canInteractWith(EntityPlayer player) {
         return tileEntity.isUseableByPlayer(player);
+    }
+
+    @Override
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
+        for(int i = 0; i < this.crafters.size(); i ++) {
+            ICrafting icrafting = (ICrafting) this.crafters.get(i);
+
+            if(lastTankAmount != tileEntity.tank.getFluidAmount()){
+                icrafting.sendProgressBarUpdate(this, 0, tileEntity.tank.getFluidAmount());
+            }
+        }
+        lastTankAmount = tileEntity.tank.getFluidAmount();
+    }
+
+    @Override
+    public void addCraftingToCrafters(ICrafting iCrafting) {
+        super.addCraftingToCrafters(iCrafting);
+        iCrafting.sendProgressBarUpdate(this, 0, lastTankAmount);
+    }
+
+    @Override
+    public void updateProgressBar(int slot, int par2) {
+        super.updateProgressBar(slot, par2);
+        if(slot == 0){
+            if(tileEntity.tank.getFluid() != null)
+                tileEntity.tank.getFluid().amount = par2;
+
+        }
+    }
+
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_) {
+        return super.transferStackInSlot(p_82846_1_, p_82846_2_);
     }
 }

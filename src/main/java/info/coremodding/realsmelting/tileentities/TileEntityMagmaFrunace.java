@@ -68,7 +68,7 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
         }
     }
 
-    public static FluidTank[] tanks;
+    public FluidTank tank;
     
     private int[]       smelt_progress;
     private final int   smelt_time;
@@ -88,11 +88,7 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
         this.inventory = new ItemStack[slots];
         this.smelting = new ItemStack[1];
         this.smelt_time = ticks;
-        tanks = new FluidTank[1];
-
-        for(int i = 0; i < tanks.length; i++){
-            tanks[i] = new FluidTank(10000);
-        }
+        tank = new FluidTank(FluidRegistry.LAVA, 0, 10000);
     }
     
     /**
@@ -113,11 +109,7 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
         this.smelting = new ItemStack[at_once];
         this.smelt_progress = new int[at_once];
         this.smelt_time = ticks;
-        tanks = new FluidTank[1];
-
-        for(int i = 0; i < tanks.length; i++){
-            tanks[i] = new FluidTank(10000);
-        }
+        tank = new FluidTank(FluidRegistry.LAVA, 0, 10000);
     }
     
     @Override
@@ -201,15 +193,15 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
                     if (inventory[19] != null) {
                         if (inventory[19].getItem() == Items.lava_bucket) {
                             if (inventory[20] == null) {
-                                if (tanks[0].getFluidAmount() < tanks[0].getCapacity())
+                                if (tank.getFluidAmount() < tank.getCapacity())
                                     setInventorySlotContents(20, new ItemStack(Items.bucket));
-                                if (tanks[0].getFluid() == null) {
-                                    tanks[0].fill(new FluidStack(FluidRegistry.LAVA, 1000), true);
-                                } else if (tanks[0].getFluidAmount() < tanks[0].getCapacity()) {
-                                    if (tanks[0].getFluidAmount() < tanks[0].getCapacity())
-                                        tanks[0].getFluid().amount += 1000;
+                                if (tank.getFluid() == null) {
+                                    tank.fill(new FluidStack(FluidRegistry.LAVA, 1000), true);
+                                } else if (tank.getFluidAmount() < tank.getCapacity()) {
+                                    if (tank.getFluidAmount() < tank.getCapacity())
+                                        tank.getFluid().amount += 1000;
                                 }
-                                if (tanks[0].getFluidAmount() < tanks[0].getCapacity()) {
+                                if (tank.getFluidAmount() < tank.getCapacity()) {
                                     inventory[19].stackSize--;
                                     if (inventory[19].stackSize == 0)
                                         inventory[19] = null;
@@ -217,17 +209,17 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
 
 
                             } else {
-                                if (tanks[0].getFluidAmount() < tanks[0].getCapacity()) {
+                                if (tank.getFluidAmount() < tank.getCapacity()) {
                                     inventory[19].stackSize--;
                                     if (inventory[19].stackSize == 0)
                                         inventory[19] = null;
                                     inventory[20].stackSize++;
                                 }
 
-                                if (tanks[0].getFluid() == null) {
-                                    tanks[0].fill(new FluidStack(FluidRegistry.LAVA, 1000), true);
-                                } else if (tanks[0].getFluidAmount() < tanks[0].getCapacity()) {
-                                    tanks[0].getFluid().amount += 1000;
+                                if (tank.getFluid() == null) {
+                                    tank.fill(new FluidStack(FluidRegistry.LAVA, 1000), true);
+                                } else if (tank.getFluidAmount() < tank.getCapacity()) {
+                                    tank.getFluid().amount += 1000;
                                 }
                             }
                         }
@@ -399,7 +391,7 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
         if(from.equals(ForgeDirection.UP) || from.equals(ForgeDirection.DOWN))
-            tanks[0].fill(resource, doFill);
+            tank.fill(resource, doFill);
         return 0;
     }
 
@@ -411,7 +403,7 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
     @Override
     public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
         if(from.equals(ForgeDirection.UP) || from.equals(ForgeDirection.DOWN))
-                tanks[0].drain(maxDrain, doDrain);
+                tank.drain(maxDrain, doDrain);
             return null;
     }
 
@@ -427,6 +419,6 @@ public class TileEntityMagmaFrunace extends TileEntity implements ISidedInventor
 
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-        return new FluidTankInfo[]{tanks[0].getInfo()};
+        return new FluidTankInfo[]{tank.getInfo()};
     }
 }
